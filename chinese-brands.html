@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电视品牌展示 - 专业电视品牌信息平台</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Global Brands</a>
+                <a href="chinese-brands.html" class="nav-link active">Chinese Brands</a>
+            </nav>
+            <h1 class="logo">电视品牌展示</h1>
+            <p class="subtitle">专业电视品牌信息平台，快速找到您需要的品牌</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- 搜索区域 -->
+            <section class="search-section">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="搜索品牌名称或品类..." class="search-input">
+                    <button id="searchBtn" class="search-btn">搜索</button>
+                </div>
+                <div class="search-tips">
+                    <span class="tip">热门搜索：</span>
+                    <span class="tag" data-search="4K">4K电视</span>
+                    <span class="tag" data-search="OLED">OLED电视</span>
+                    <span class="tag" data-search="智能">智能电视</span>
+                    <span class="tag" data-search="大屏">大屏电视</span>
+                </div>
+            </section>
+
+            <!-- 品牌统计 -->
+            <section class="stats-section">
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalBrands">0</span>
+                        <span class="stat-label">品牌总数</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalCategories">0</span>
+                        <span class="stat-label">品类数量</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 品牌列表 -->
+            <section class="brands-section">
+                <h2 class="section-title">品牌展示</h2>
+                <div class="brands-grid" id="brandsGrid">
+                    <!-- 品牌卡片将通过JavaScript动态生成 -->
+                </div>
+            </section>
+
+            <!-- 分类筛选 -->
+            <section class="filter-section">
+                <h3 class="filter-title">按品类筛选</h3>
+                <div class="filter-tags" id="categoryFilters">
+                    <!-- 分类标签将通过JavaScript动态生成 -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 电视品牌展示平台. 专业电视品牌信息服务平台</p>
+        </div>
+    </footer>
+
+    <!-- 品牌详情模态框 -->
+    <div id="brandModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent">
+                <!-- 品牌详情内容将通过JavaScript动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
