@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美食大转盘 - 随机美食推荐与营养分析</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .wheel-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .wheel-section {
+            margin-bottom: 40px;
+        }
+        
+        .wheel {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #ff6b6b 0deg 45deg,
+                #4ecdc4 45deg 90deg,
+                #45b7d1 90deg 135deg,
+                #96ceb4 135deg 180deg,
+                #feca57 180deg 225deg,
+                #ff9ff3 225deg 270deg,
+                #54a0ff 270deg 315deg,
+                #5f27cd 315deg 360deg
+            );
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .wheel-pointer {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 40px solid #e74c3c;
+            z-index: 10;
+        }
+        
+        .wheel-spin {
+            animation: spin 3s ease-out;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(var(--final-rotation)); }
+        }
+        
+        .spin-btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .spin-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .spin-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .result-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: none;
+        }
+        
+        .food-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 15px;
+            margin: 0 auto 20px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #666;
+        }
+        
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .nutrition-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .nutrition-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+        }
+        
+        .nutrition-label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .food-description {
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #007bff;
+        }
+        
+        .wheel-labels {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        
+        .wheel-label {
+            position: absolute;
+            transform-origin: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Global Brands</a>
+                <a href="chinese-brands.html" class="nav-link">Chinese Brands</a>
+                <a href="tv-repair-game.html" class="nav-link">维修游戏</a>
+                <a href="food-wheel.html" class="nav-link active">美食转盘</a>
+                <a href="timer.html" class="nav-link">计时器</a>
+                <a href="sitemap.html" class="nav-link">网站地图</a>
+            </nav>
+            <h1 class="logo">美食大转盘</h1>
+            <p class="subtitle">转动转盘，发现美味，了解营养</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="wheel-container">
+                <div class="wheel-section">
+                    <h2>美食大转盘</h2>
+                    <p>点击转盘开始旋转，获得随机美食推荐！</p>
+                    
+                    <div class="wheel" id="wheel">
+                        <div class="wheel-pointer"></div>
+                        <div class="wheel-labels">
+                            <div class="wheel-label" style="transform: rotate(22.5deg) translateY(-150px)">🍕</div>
+                            <div class="wheel-label" style="transform: rotate(67.5deg) translateY(-150px)">🍜</div>
+                            <div class="wheel-label" style="transform: rotate(112.5deg) translateY(-150px)">🍣</div>
+                            <div class="wheel-label" style="transform: rotate(157.5deg) translateY(-150px)">🍔</div>
+                            <div class="wheel-label" style="transform: rotate(202.5deg) translateY(-150px)">🥗</div>
+                            <div class="wheel-label" style="transform: rotate(247.5deg) translateY(-150px)">🍰</div>
+                            <div class="wheel-label" style="transform: rotate(292.5deg) translateY(-150px)">🍖</div>
+                            <div class="wheel-label" style="transform: rotate(337.5deg) translateY(-150px)">🥘</div>
+                        </div>
+                    </div>
+                    
+                    <button class="spin-btn" id="spinBtn" onclick="spinWheel()">开始旋转</button>
+                </div>
+
+                <div class="result-card" id="resultCard">
+                    <h3 id="foodName">美食名称</h3>
+                    <div class="food-image" id="foodImage">🍕</div>
+                    
+                    <div class="food-description">
+                        <p id="foodDescription">美食描述</p>
+                    </div>
+                    
+                    <h4>营养成分 (每100g)</h4>
+                    <div class="nutrition-grid" id="nutritionGrid">
+                        <!-- 营养成分将通过JavaScript动态生成 -->
+                    </div>
+                    
+                    <div class="food-description">
+                        <h5>健康建议</h5>
+                        <p id="healthAdvice">健康建议内容</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="page-summary">
+                <h4>页面内容概要</h4>
+                <p>美食大转盘页面提供互动式美食推荐功能，用户可以通过转动转盘获得随机美食建议。每个推荐都包含详细的营养成分分析、健康建议和食用建议，帮助用户了解不同食物的营养价值，做出更健康的饮食选择。</p>
+            </div>
+            <p>&copy; 2024 美食推荐平台. 健康饮食，美好生活</p>
+        </div>
+    </footer>
+
+    <script>
+        const foodData = [
+            {
+                name: "意大利披萨",
+                emoji: "🍕",
+                description: "经典的意大利披萨，薄脆的饼底配上丰富的配料，是深受欢迎的美食选择。",
+                nutrition: {
+                    calories: 266,
+                    protein: 11,
+                    carbs: 33,
+                    fat: 10,
+                    fiber: 2.5
+                },
+                healthAdvice: "披萨富含碳水化合物和蛋白质，适合作为正餐。建议选择蔬菜配料较多的版本，减少奶酪用量以控制热量。"
+            },
+            {
+                name: "日式拉面",
+                emoji: "🍜",
+                description: "浓郁的汤底配上弹牙的面条，是日本最受欢迎的传统美食之一。",
+                nutrition: {
+                    calories: 290,
+                    protein: 12,
+                    carbs: 45,
+                    fat: 8,
+                    fiber: 3
+                },
+                healthAdvice: "拉面营养丰富但钠含量较高，建议选择清汤版本，多放蔬菜，少喝汤以减少盐分摄入。"
+            },
+            {
+                name: "寿司拼盘",
+                emoji: "🍣",
+                description: "新鲜的鱼肉配上醋饭，是日本料理的精髓，营养丰富且低脂肪。",
+                nutrition: {
+                    calories: 150,
+                    protein: 18,
+                    carbs: 25,
+                    fat: 2,
+                    fiber: 1
+                },
+                healthAdvice: "寿司是优质蛋白质和omega-3脂肪酸的良好来源，建议选择三文鱼、金枪鱼等深海鱼类。"
+            },
+            {
+                name: "美式汉堡",
+                emoji: "🍔",
+                description: "多汁的牛肉饼配上新鲜蔬菜和面包，是美式快餐的代表。",
+                nutrition: {
+                    calories: 295,
+                    protein: 17,
+                    carbs: 30,
+                    fat: 12,
+                    fiber: 2
+                },
+                healthAdvice: "汉堡蛋白质丰富但热量较高，建议选择瘦肉版本，多放蔬菜，少放酱料。"
+            },
+            {
+                name: "健康沙拉",
+                emoji: "🥗",
+                description: "新鲜蔬菜配上坚果和蛋白质，是健康饮食的理想选择。",
+                nutrition: {
+                    calories: 120,
+                    protein: 8,
+                    carbs: 15,
+                    fat: 6,
+                    fiber: 5
+                },
+                healthAdvice: "沙拉富含维生素、矿物质和膳食纤维，是减肥和健康饮食的绝佳选择。建议选择低脂酱料。"
+            },
+            {
+                name: "精致蛋糕",
+                emoji: "🍰",
+                description: "香甜可口的蛋糕，是庆祝和享受生活的甜蜜选择。",
+                nutrition: {
+                    calories: 257,
+                    protein: 4,
+                    carbs: 35,
+                    fat: 12,
+                    fiber: 1
+                },
+                healthAdvice: "蛋糕热量较高，建议适量食用，可以作为偶尔的甜点享受。选择水果装饰的版本更健康。"
+            },
+            {
+                name: "烤牛排",
+                emoji: "🍖",
+                description: "鲜嫩多汁的烤牛排，是优质蛋白质和铁质的绝佳来源。",
+                nutrition: {
+                    calories: 250,
+                    protein: 26,
+                    carbs: 0,
+                    fat: 15,
+                    fiber: 0
+                },
+                healthAdvice: "牛排富含优质蛋白质和铁质，适合健身人群。建议选择瘦肉部分，控制食用频率。"
+            },
+            {
+                name: "咖喱饭",
+                emoji: "🥘",
+                description: "香浓的咖喱配上米饭，是亚洲美食的经典组合。",
+                nutrition: {
+                    calories: 320,
+                    protein: 14,
+                    carbs: 50,
+                    fat: 8,
+                    fiber: 4
+                },
+                healthAdvice: "咖喱富含香料和蔬菜，具有抗炎作用。建议选择蔬菜较多的版本，控制米饭用量。"
+            }
+        ];
+
+        let isSpinning = false;
+
+        function spinWheel() {
+            if (isSpinning) return;
+            
+            isSpinning = true;
+            const spinBtn = document.getElementById('spinBtn');
+            const wheel = document.getElementById('wheel');
+            const resultCard = document.getElementById('resultCard');
+            
+            spinBtn.disabled = true;
+            spinBtn.textContent = '旋转中...';
+            resultCard.style.display = 'none';
+            
+            // 随机选择食物
+            const randomIndex = Math.floor(Math.random() * foodData.length);
+            const selectedFood = foodData[randomIndex];
+            
+            // 计算旋转角度
+            const baseRotation = randomIndex * 45; // 每个食物占45度
+            const extraRotation = Math.random() * 45; // 额外随机角度
+            const finalRotation = baseRotation + extraRotation + 1440; // 多转几圈
+            
+            // 设置CSS变量用于动画
+            wheel.style.setProperty('--final-rotation', `${finalRotation}deg`);
+            wheel.classList.add('wheel-spin');
+            
+            // 3秒后显示结果
+            setTimeout(() => {
+                showResult(selectedFood);
+                wheel.classList.remove('wheel-spin');
+                spinBtn.disabled = false;
+                spinBtn.textContent = '再次旋转';
+                isSpinning = false;
+            }, 3000);
+        }
+
+        function showResult(food) {
+            const resultCard = document.getElementById('resultCard');
+            const foodName = document.getElementById('foodName');
+            const foodImage = document.getElementById('foodImage');
+            const foodDescription = document.getElementById('foodDescription');
+            const nutritionGrid = document.getElementById('nutritionGrid');
+            const healthAdvice = document.getElementById('healthAdvice');
+            
+            foodName.textContent = food.name;
+            foodImage.textContent = food.emoji;
+            foodDescription.textContent = food.description;
+            healthAdvice.textContent = food.healthAdvice;
+            
+            // 生成营养成分
+            nutritionGrid.innerHTML = `
+                <div class="nutrition-item">
+                    <div class="nutrition-value">${food.nutrition.calories}</div>
+                    <div class="nutrition-label">卡路里</div>
+                </div>
+                <div class="nutrition-item">
+                    <div class="nutrition-value">${food.nutrition.protein}g</div>
+                    <div class="nutrition-label">蛋白质</div>
+                </div>
+                <div class="nutrition-item">
+                    <div class="nutrition-value">${food.nutrition.carbs}g</div>
+                    <div class="nutrition-label">碳水化合物</div>
+                </div>
+                <div class="nutrition-item">
+                    <div class="nutrition-value">${food.nutrition.fat}g</div>
+                    <div class="nutrition-label">脂肪</div>
+                </div>
+                <div class="nutrition-item">
+                    <div class="nutrition-value">${food.nutrition.fiber}g</div>
+                    <div class="nutrition-label">膳食纤维</div>
+                </div>
+            `;
+            
+            resultCard.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

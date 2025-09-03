@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网站地图 - 完整页面导航指南</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .sitemap-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .sitemap-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .sitemap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .sitemap-category {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            border-left: 5px solid #007bff;
+        }
+        
+        .sitemap-category h3 {
+            color: #007bff;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .sitemap-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sitemap-links li {
+            margin-bottom: 12px;
+        }
+        
+        .sitemap-links a {
+            display: block;
+            padding: 10px 15px;
+            background: white;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s;
+            border: 1px solid #e9ecef;
+        }
+        
+        .sitemap-links a:hover {
+            background: #007bff;
+            color: white;
+            transform: translateX(5px);
+            box-shadow: 0 3px 10px rgba(0,123,255,0.3);
+        }
+        
+        .sitemap-links a.active {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        
+        .sitemap-description {
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #007bff;
+        }
+        
+        .sitemap-description h4 {
+            color: #007bff;
+            margin-top: 0;
+        }
+        
+        .sitemap-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .search-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+        }
+        
+        .search-results {
+            margin-top: 20px;
+        }
+        
+        .search-result-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .search-result-item a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .search-result-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Global Brands</a>
+                <a href="chinese-brands.html" class="nav-link">Chinese Brands</a>
+                <a href="tv-repair-game.html" class="nav-link">维修游戏</a>
+                <a href="food-wheel.html" class="nav-link">美食转盘</a>
+                <a href="timer.html" class="nav-link">计时器</a>
+                <a href="sitemap.html" class="nav-link active">网站地图</a>
+            </nav>
+            <h1 class="logo">网站地图</h1>
+            <p class="subtitle">完整的页面导航指南</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="sitemap-container">
+                <!-- 搜索功能 -->
+                <div class="search-box">
+                    <h3>🔍 快速搜索页面</h3>
+                    <input type="text" class="search-input" id="searchInput" placeholder="输入关键词搜索页面..." onkeyup="searchPages()">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+
+                <!-- 网站统计 -->
+                <div class="sitemap-section">
+                    <h2>📊 网站概览</h2>
+                    <div class="sitemap-stats">
+                        <div class="stat-card">
+                            <div class="stat-number">6</div>
+                            <div class="stat-label">总页面数</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">4</div>
+                            <div class="stat-label">功能页面</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">2</div>
+                            <div class="stat-label">展示页面</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">响应式设计</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 主要页面 -->
+                <div class="sitemap-section">
+                    <h2>🏠 主要页面</h2>
+                    <div class="sitemap-grid">
+                        <div class="sitemap-category">
+                            <h3>🏢 品牌展示</h3>
+                            <ul class="sitemap-links">
+                                <li><a href="index.html" class="active">全球电视品牌目录</a></li>
+                                <li><a href="chinese-brands.html">中国电视品牌展示</a></li>
+                            </ul>
+                            <div class="sitemap-description">
+                                <h4>页面说明</h4>
+                                <p>展示全球知名电视品牌信息，包括品牌介绍、产品特色、联系方式等详细信息。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 功能页面 -->
+                <div class="sitemap-section">
+                    <h2>⚡ 功能页面</h2>
+                    <div class="sitemap-grid">
+                        <div class="sitemap-category">
+                            <h3>🎮 娱乐游戏</h3>
+                            <ul class="sitemap-links">
+                                <li><a href="tv-repair-game.html">电视维修小游戏</a></li>
+                                <li><a href="food-wheel.html">美食大转盘</a></li>
+                            </ul>
+                            <div class="sitemap-description">
+                                <h4>功能说明</h4>
+                                <p>提供互动式游戏体验，包括电视故障诊断挑战和随机美食推荐功能。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="sitemap-category">
+                            <h3>⏰ 实用工具</h3>
+                            <ul class="sitemap-links">
+                                <li><a href="timer.html">智能计时器</a></li>
+                            </ul>
+                            <div class="sitemap-description">
+                                <h4>功能说明</h4>
+                                <p>多功能时间管理工具，包括倒计时器、秒表和正计时器，帮助用户高效管理时间。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 技术信息 -->
+                <div class="sitemap-section">
+                    <h2>🔧 技术信息</h2>
+                    <div class="sitemap-grid">
+                        <div class="sitemap-category">
+                            <h3>📋 系统文件</h3>
+                            <ul class="sitemap-links">
+                                <li><a href="robots.txt" target="_blank">robots.txt</a></li>
+                                <li><a href="sitemap.xml" target="_blank">sitemap.xml</a></li>
+                                <li><a href="ads.txt" target="_blank">ads.txt</a></li>
+                            </ul>
+                            <div class="sitemap-description">
+                                <h4>文件说明</h4>
+                                <p>搜索引擎优化和广告投放相关的技术配置文件。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="sitemap-category">
+                            <h3>📚 文档说明</h3>
+                            <ul class="sitemap-links">
+                                <li><a href="README.md" target="_blank">README.md</a></li>
+                                <li><a href="NAVIGATION.md" target="_blank">NAVIGATION.md</a></li>
+                                <li><a href="GLOBAL-README.md" target="_blank">GLOBAL-README.md</a></li>
+                            </ul>
+                            <div class="sitemap-description">
+                                <h4>文档说明</h4>
+                                <p>项目说明文档、导航指南和全局说明文档。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 页面功能说明 -->
+                <div class="sitemap-section">
+                    <h2>📖 页面功能详细说明</h2>
+                    <div class="sitemap-description">
+                        <h4>🏠 首页 (index.html)</h4>
+                        <p>全球电视品牌目录主页，展示国际知名电视品牌信息，支持按地区、类别筛选，提供品牌搜索功能。</p>
+                    </div>
+                    
+                    <div class="sitemap-description">
+                        <h4>🇨🇳 中国品牌页 (chinese-brands.html)</h4>
+                        <p>专门展示中国电视品牌，包括海信、TCL、创维、长虹等知名品牌，提供详细的产品信息和联系方式。</p>
+                    </div>
+                    
+                    <div class="sitemap-description">
+                        <h4>🎮 维修游戏页 (tv-repair-game.html)</h4>
+                        <p>互动式电视故障诊断游戏，通过问答形式帮助用户学习电视维修知识，提高用户参与度和停留时间。</p>
+                    </div>
+                    
+                    <div class="sitemap-description">
+                        <h4>🍕 美食转盘页 (food-wheel.html)</h4>
+                        <p>随机美食推荐工具，用户转动转盘获得美食建议，包含详细的营养成分分析和健康建议。</p>
+                    </div>
+                    
+                    <div class="sitemap-description">
+                        <h4>⏰ 计时器页 (timer.html)</h4>
+                        <p>多功能时间管理工具，包含倒计时、秒表、正计时功能，支持时间设置和提醒功能。</p>
+                    </div>
+                    
+                    <div class="sitemap-description">
+                        <h4>🗺️ 网站地图页 (sitemap.html)</h4>
+                        <p>当前页面，提供完整的网站结构导航，帮助用户和搜索引擎了解网站内容组织。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="page-summary">
+                <h4>页面内容概要</h4>
+                <p>网站地图页面提供完整的网站结构导航，包含所有页面的分类展示、功能说明和快速搜索功能。页面按功能分类组织，包括品牌展示、娱乐游戏、实用工具等类别，每个页面都有详细的功能说明，帮助用户快速找到所需内容。</p>
+            </div>
+            <p>&copy; 2024 网站导航平台. 清晰导航，便捷访问</p>
+        </div>
+    </footer>
+
+    <script>
+        // 页面搜索功能
+        function searchPages() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const searchResults = document.getElementById('searchResults');
+            
+            if (searchTerm.length < 2) {
+                searchResults.innerHTML = '';
+                return;
+            }
+            
+            // 页面数据
+            const pages = [
+                { title: '全球电视品牌目录', url: 'index.html', description: '展示全球知名电视品牌信息' },
+                { title: '中国电视品牌展示', url: 'chinese-brands.html', description: '专门展示中国电视品牌' },
+                { title: '电视维修小游戏', url: 'tv-repair-game.html', description: '互动式电视故障诊断游戏' },
+                { title: '美食大转盘', url: 'food-wheel.html', description: '随机美食推荐工具' },
+                { title: '智能计时器', url: 'timer.html', description: '多功能时间管理工具' },
+                { title: '网站地图', url: 'sitemap.html', description: '完整的网站结构导航' }
+            ];
+            
+            // 过滤结果
+            const filteredPages = pages.filter(page => 
+                page.title.toLowerCase().includes(searchTerm) || 
+                page.description.toLowerCase().includes(searchTerm)
+            );
+            
+            // 显示结果
+            if (filteredPages.length > 0) {
+                searchResults.innerHTML = filteredPages.map(page => `
+                    <div class="search-result-item">
+                        <a href="${page.url}">${page.title}</a>
+                        <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">${page.description}</p>
+                    </div>
+                `).join('');
+            } else {
+                searchResults.innerHTML = '<p style="color: #666; text-align: center;">未找到相关页面</p>';
+            }
+        }
+        
+        // 页面加载完成后高亮当前页面
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const links = document.querySelectorAll('.sitemap-links a');
+            
+            links.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -486,6 +486,29 @@ body {
     margin-top: 50px;
 }
 
+/* 页面概要样式 */
+.page-summary {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-left: 4px solid #3498db;
+    text-align: left;
+}
+
+.page-summary h4 {
+    color: #3498db;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.page-summary p {
+    margin: 0;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     .container {

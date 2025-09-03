@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电视维修小游戏 - 故障诊断挑战</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .game-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .game-area {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .problem-card {
+            background: white;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .solution-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .solution-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .solution-btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        .solution-btn.correct {
+            background: #28a745;
+        }
+        
+        .solution-btn.incorrect {
+            background: #dc3545;
+        }
+        
+        .score-display {
+            background: #28a745;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .game-controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .start-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .start-btn:hover {
+            background: #1e7e34;
+            transform: translateY(-2px);
+        }
+        
+        .feedback {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Global Brands</a>
+                <a href="chinese-brands.html" class="nav-link">Chinese Brands</a>
+                <a href="tv-repair-game.html" class="nav-link active">维修游戏</a>
+                <a href="food-wheel.html" class="nav-link">美食转盘</a>
+                <a href="timer.html" class="nav-link">计时器</a>
+                <a href="sitemap.html" class="nav-link">网站地图</a>
+            </nav>
+            <h1 class="logo">电视维修小游戏</h1>
+            <p class="subtitle">通过游戏学习电视故障诊断知识</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="game-container">
+                <div class="game-header">
+                    <h2>电视故障诊断挑战</h2>
+                    <p>测试您的电视维修知识，诊断各种常见故障！</p>
+                </div>
+
+                <div class="score-display" id="scoreDisplay" style="display: none;">
+                    <h3>当前得分: <span id="currentScore">0</span> / <span id="totalQuestions">0</span></h3>
+                </div>
+
+                <div class="game-area" id="gameArea" style="display: none;">
+                    <div class="problem-card">
+                        <h3 id="problemTitle">问题标题</h3>
+                        <p id="problemDescription">问题描述</p>
+                        <div class="solution-options" id="solutionOptions">
+                            <!-- 选项将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                    
+                    <div id="feedback" class="feedback" style="display: none;"></div>
+                    
+                    <div class="game-controls">
+                        <button id="nextBtn" class="start-btn" style="display: none;">下一题</button>
+                    </div>
+                </div>
+
+                <div class="game-controls" id="startControls">
+                    <button class="start-btn" onclick="startGame()">开始游戏</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="page-summary">
+                <h4>页面内容概要</h4>
+                <p>电视维修小游戏页面提供互动式故障诊断挑战，帮助用户学习电视维修知识。游戏包含多种常见故障场景，用户需要选择正确的解决方案来获得分数。通过游戏化学习，提高用户对电视维修技术的理解和兴趣。</p>
+            </div>
+            <p>&copy; 2024 电视维修服务平台. 专业电视维修与故障诊断</p>
+        </div>
+    </footer>
+
+    <script>
+        const gameData = [
+            {
+                title: "电视黑屏故障",
+                description: "用户反映电视开机后屏幕完全黑屏，但电源指示灯亮起。请选择最可能的故障原因：",
+                options: [
+                    "背光板故障",
+                    "主板故障", 
+                    "电源板故障",
+                    "屏幕面板故障"
+                ],
+                correct: 0,
+                explanation: "背光板故障是导致电视黑屏最常见的原因，通常表现为有声音但无图像。"
+            },
+            {
+                title: "电视无声音问题",
+                description: "电视图像正常，但完全没有声音输出。以下哪个检查步骤最优先？",
+                options: [
+                    "检查音量设置",
+                    "更换音频线缆",
+                    "检查扬声器连接",
+                    "重启电视"
+                ],
+                correct: 0,
+                explanation: "首先检查音量设置，这是最常见且最容易解决的问题。"
+            },
+            {
+                title: "电视花屏故障",
+                description: "电视显示花屏，图像扭曲变形。最可能的原因是：",
+                options: [
+                    "信号源问题",
+                    "主板故障",
+                    "屏幕排线松动",
+                    "电源不稳定"
+                ],
+                correct: 2,
+                explanation: "屏幕排线松动是导致花屏的常见原因，需要重新连接或更换排线。"
+            },
+            {
+                title: "电视无法开机",
+                description: "电视完全无法开机，电源指示灯也不亮。应该首先检查：",
+                options: [
+                    "遥控器电池",
+                    "电源插座",
+                    "电视开关",
+                    "主板电路"
+                ],
+                correct: 1,
+                explanation: "首先检查电源插座是否正常供电，这是最基础的故障排除步骤。"
+            },
+            {
+                title: "电视闪烁问题",
+                description: "电视屏幕出现闪烁现象，时有时无。可能的原因不包括：",
+                options: [
+                    "背光板老化",
+                    "电源电压不稳",
+                    "主板故障",
+                    "遥控器故障"
+                ],
+                correct: 3,
+                explanation: "遥控器故障不会导致屏幕闪烁，这通常是硬件问题。"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let gameStarted = false;
+
+        function startGame() {
+            gameStarted = true;
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('startControls').style.display = 'none';
+            document.getElementById('gameArea').style.display = 'block';
+            document.getElementById('scoreDisplay').style.display = 'block';
+            showQuestion();
+        }
+
+        function showQuestion() {
+            if (currentQuestion >= gameData.length) {
+                endGame();
+                return;
+            }
+
+            const question = gameData[currentQuestion];
+            document.getElementById('problemTitle').textContent = question.title;
+            document.getElementById('problemDescription').textContent = question.description;
+            document.getElementById('currentScore').textContent = score;
+            document.getElementById('totalQuestions').textContent = gameData.length;
+
+            const optionsContainer = document.getElementById('solutionOptions');
+            optionsContainer.innerHTML = '';
+
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'solution-btn';
+                button.textContent = option;
+                button.onclick = () => selectAnswer(index);
+                optionsContainer.appendChild(button);
+            });
+
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'none';
+        }
+
+        function selectAnswer(selectedIndex) {
+            const question = gameData[currentQuestion];
+            const buttons = document.querySelectorAll('.solution-btn');
+            const feedback = document.getElementById('feedback');
+
+            buttons.forEach(btn => btn.style.pointerEvents = 'none');
+
+            if (selectedIndex === question.correct) {
+                score++;
+                feedback.textContent = `正确！${question.explanation}`;
+                feedback.className = 'feedback correct';
+                buttons[selectedIndex].classList.add('correct');
+            } else {
+                feedback.textContent = `错误！正确答案是：${question.options[question.correct]}。${question.explanation}`;
+                feedback.className = 'feedback incorrect';
+                buttons[selectedIndex].classList.add('incorrect');
+                buttons[question.correct].classList.add('correct');
+            }
+
+            feedback.style.display = 'block';
+            document.getElementById('nextBtn').style.display = 'inline-block';
+            document.getElementById('currentScore').textContent = score;
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            showQuestion();
+        }
+
+        function endGame() {
+            const gameArea = document.getElementById('gameArea');
+            gameArea.innerHTML = `
+                <div class="problem-card">
+                    <h3>游戏结束！</h3>
+                    <p>您的最终得分：${score} / ${gameData.length}</p>
+                    <p>正确率：${Math.round((score / gameData.length) * 100)}%</p>
+                    <div class="game-controls">
+                        <button class="start-btn" onclick="location.reload()">重新开始</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        document.getElementById('nextBtn').onclick = nextQuestion;
+    </script>
+</body>
+</html>
