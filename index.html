@@ -164,38 +164,38 @@
     <script src="global-script.js"></script>
     
     <script>
-        // 收藏功能
+        // Bookmark functionality
         function toggleBookmark() {
             const bookmarkBtn = document.getElementById('bookmarkBtn');
             const bookmarkText = document.getElementById('bookmarkText');
             const isBookmarked = bookmarkBtn.classList.contains('bookmarked');
             
             if (isBookmarked) {
-                // 取消收藏
+                // Remove bookmark
                 bookmarkBtn.classList.remove('bookmarked');
-                bookmarkText.textContent = '收藏';
+                bookmarkText.textContent = 'Bookmark';
                 localStorage.removeItem('bookmarked_' + window.location.pathname);
                 
-                // 显示提示
-                showNotification('已取消收藏', 'info');
+                // Show notification
+                showNotification('Bookmark removed', 'info');
             } else {
-                // 添加收藏
+                // Add bookmark
                 bookmarkBtn.classList.add('bookmarked');
-                bookmarkText.textContent = '已收藏';
+                bookmarkText.textContent = 'Bookmarked';
                 localStorage.setItem('bookmarked_' + window.location.pathname, 'true');
                 
-                // 显示提示
-                showNotification('已添加到收藏', 'success');
+                // Show notification
+                showNotification('Added to bookmarks', 'success');
             }
         }
         
-        // 显示通知
+        // Show notification
         function showNotification(message, type) {
             const notification = document.createElement('div');
             notification.className = `notification notification-${type}`;
             notification.textContent = message;
             
-            // 添加样式
+            // Add styles
             notification.style.cssText = `
                 position: fixed;
                 top: 20px;
@@ -211,7 +211,7 @@
             
             document.body.appendChild(notification);
             
-            // 3秒后自动移除
+            // Auto remove after 3 seconds
             setTimeout(() => {
                 notification.style.animation = 'slideOut 0.3s ease';
                 setTimeout(() => {
@@ -220,7 +220,7 @@
             }, 3000);
         }
         
-        // 页面加载时检查收藏状态
+        // Check bookmark status on page load
         document.addEventListener('DOMContentLoaded', function() {
             const bookmarkBtn = document.getElementById('bookmarkBtn');
             const bookmarkText = document.getElementById('bookmarkText');
@@ -228,11 +228,11 @@
             
             if (isBookmarked) {
                 bookmarkBtn.classList.add('bookmarked');
-                bookmarkText.textContent = '已收藏';
+                bookmarkText.textContent = 'Bookmarked';
             }
         });
         
-        // 添加CSS动画
+        // Add CSS animations
         const style = document.createElement('style');
         style.textContent = `
             @keyframes slideIn {
