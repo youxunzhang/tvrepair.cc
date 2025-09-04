@@ -30,6 +30,16 @@ function initializeApp() {
     generateRegionFilters();
     generateCategoryFilters();
     generateSearchTags();
+    preloadLogos();
+}
+
+// Preload Logos for Better Performance
+function preloadLogos() {
+    const logoUrls = globalBrandsData.map(brand => brand.logo);
+    logoUrls.forEach(url => {
+        const img = new Image();
+        img.src = url;
+    });
 }
 
 // Setup Event Listeners
@@ -70,7 +80,12 @@ function displayBrands(brands) {
     brandsGrid.innerHTML = brands.map(brand => `
         <div class="brand-card" onclick="showBrandDetail(${brand.id})">
             <div class="brand-header">
-                <div class="brand-logo">${brand.logo}</div>
+                <div class="brand-logo loading" id="logo-${brand.id}">
+                    <img src="${brand.logo}" alt="${brand.logoAlt}" class="brand-logo-img" 
+                         onload="handleLogoLoad(${brand.id})" 
+                         onerror="handleLogoError(${brand.id}, '${brand.name}')">
+                    <div class="brand-logo-fallback" style="display: none;">${brand.name.charAt(0)}</div>
+                </div>
                 <div class="brand-info">
                     <h3>${brand.name}</h3>
                     <div class="brand-country">${brand.country}</div>
@@ -86,6 +101,31 @@ function displayBrands(brands) {
             <button class="contact-btn">View Details</button>
         </div>
     `).join('');
+}
+
+// Handle Logo Loading
+function handleLogoLoad(brandId) {
+    const logoContainer = document.getElementById(`logo-${brandId}`);
+    if (logoContainer) {
+        logoContainer.classList.remove('loading');
+        const img = logoContainer.querySelector('.brand-logo-img');
+        if (img) {
+            img.classList.add('loaded');
+        }
+    }
+}
+
+// Handle Logo Error
+function handleLogoError(brandId, brandName) {
+    const logoContainer = document.getElementById(`logo-${brandId}`);
+    if (logoContainer) {
+        logoContainer.classList.remove('loading');
+        const img = logoContainer.querySelector('.brand-logo-img');
+        const fallback = logoContainer.querySelector('.brand-logo-fallback');
+        
+        if (img) img.style.display = 'none';
+        if (fallback) fallback.style.display = 'flex';
+    }
 }
 
 // Update Statistics

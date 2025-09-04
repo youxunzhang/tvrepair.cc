@@ -4,7 +4,8 @@ const globalBrandsData = [
     {
         id: 1,
         name: "Samsung",
-        logo: "S",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg",
+        logoAlt: "Samsung Electronics Logo",
         country: "South Korea",
         region: "Asia",
         description: "Global leader in consumer electronics, pioneering QLED and Micro LED technology with innovative design and cutting-edge display technology.",
@@ -25,7 +26,8 @@ const globalBrandsData = [
     {
         id: 2,
         name: "LG",
-        logo: "L",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/2/20/LG_logo_%282015%29.svg",
+        logoAlt: "LG Electronics Logo",
         country: "South Korea",
         region: "Asia",
         description: "World leader in OLED technology, delivering exceptional picture quality and innovative webOS smart platform with Gallery design options.",
@@ -46,7 +48,8 @@ const globalBrandsData = [
     {
         id: 3,
         name: "Sony",
-        logo: "S",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/2/29/Sony_logo.svg",
+        logoAlt: "Sony Corporation Logo",
         country: "Japan",
         region: "Asia",
         description: "Premium television manufacturer known for exceptional picture quality, advanced audio technology, and the revolutionary XR cognitive processor.",
@@ -67,7 +70,8 @@ const globalBrandsData = [
     {
         id: 4,
         name: "Panasonic",
-        logo: "P",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/3/3a/Panasonic_logo_%28Blue%29.svg",
+        logoAlt: "Panasonic Corporation Logo",
         country: "Japan",
         region: "Asia",
         description: "Renowned for professional-grade picture quality and advanced color accuracy, offering premium OLED and LED televisions with Hollywood-tuned calibration.",
@@ -88,7 +92,8 @@ const globalBrandsData = [
     {
         id: 5,
         name: "Sharp",
-        logo: "S",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Sharp_logo.svg",
+        logoAlt: "Sharp Corporation Logo",
         country: "Japan",
         region: "Asia",
         description: "Pioneer in LCD technology with innovative XLED display technology, delivering exceptional color accuracy and energy efficiency.",
@@ -109,7 +114,8 @@ const globalBrandsData = [
     {
         id: 6,
         name: "Philips",
-        logo: "P",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/4/40/Philips_logo_%282015%29.svg",
+        logoAlt: "Philips Logo",
         country: "Netherlands",
         region: "Europe",
         description: "European electronics giant known for innovative design, Ambilight technology, and P5 picture processing engine for exceptional viewing experience.",
@@ -130,7 +136,8 @@ const globalBrandsData = [
     {
         id: 7,
         name: "Toshiba",
-        logo: "T",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/1/14/Toshiba_logo_%282015%29.svg",
+        logoAlt: "Toshiba Logo",
         country: "Japan",
         region: "Asia",
         description: "Established Japanese brand offering reliable televisions with advanced picture processing and smart connectivity features.",
@@ -151,7 +158,8 @@ const globalBrandsData = [
     {
         id: 8,
         name: "Vizio",
-        logo: "V",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/a/a1/Vizio_logo_%282015%29.svg",
+        logoAlt: "Vizio Logo",
         country: "United States",
         region: "Americas",
         description: "American television manufacturer specializing in high-value smart TVs with advanced features and competitive pricing.",
@@ -172,7 +180,8 @@ const globalBrandsData = [
     {
         id: 9,
         name: "TCL",
-        logo: "T",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/1/1b/TCL_logo.svg",
+        logoAlt: "TCL Logo",
         country: "China",
         region: "Asia",
         description: "Global consumer electronics leader offering innovative QLED and Mini LED technology with exceptional value and smart features.",
@@ -193,7 +202,8 @@ const globalBrandsData = [
     {
         id: 10,
         name: "Hisense",
-        logo: "H",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Hisense_logo.svg",
+        logoAlt: "Hisense Logo",
         country: "China",
         region: "Asia",
         description: "Leading Chinese manufacturer specializing in 4K, OLED, and laser TV technology with global presence and innovative display solutions.",
@@ -210,6 +220,116 @@ const globalBrandsData = [
             { name: "Hisense E8H", description: "4K Smart TV with AI voice control" }
         ],
         features: ["ULED Technology", "Dolby Vision", "AI Voice Control", "Laser TV", "4K Ultra HD"]
+    },
+    {
+        id: 11,
+        name: "Xiaomi",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/2/29/Xiaomi_logo.svg",
+        logoAlt: "Xiaomi Logo",
+        country: "China",
+        region: "Asia",
+        description: "Innovative technology company offering high-quality smart TVs with MIUI for TV, exceptional value, and cutting-edge features.",
+        categories: ["4K TV", "Smart TV", "Android TV", "Gaming TV", "Budget TV"],
+        contact: {
+            phone: "+86-400-100-5678",
+            email: "service@mi.com",
+            website: "https://www.mi.com",
+            address: "Xiaomi Corporation, 8th Floor, Building 6, No. 33, Erqi District, Zhengzhou, China"
+        },
+        products: [
+            { name: "Xiaomi Mi TV 6", description: "4K OLED TV with AI upscaling" },
+            { name: "Xiaomi Mi TV 5", description: "4K QLED TV with quantum dots" },
+            { name: "Xiaomi Mi TV 4", description: "4K Smart TV with Android TV" }
+        ],
+        features: ["MIUI for TV", "AI Upscaling", "Quantum Dots", "Android TV", "PatchWall"]
+    },
+    {
+        id: 12,
+        name: "Skyworth",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Skyworth_logo.svg",
+        logoAlt: "Skyworth Logo",
+        country: "China",
+        region: "Asia",
+        description: "Leading Chinese electronics manufacturer specializing in smart TVs, OLED displays, and innovative home entertainment solutions.",
+        categories: ["4K TV", "OLED TV", "Smart TV", "Gaming TV", "Android TV"],
+        contact: {
+            phone: "+86-755-3333-9999",
+            email: "service@skyworth.com",
+            website: "https://www.skyworth.com",
+            address: "Skyworth Group, Skyworth Building, 5 Gaoxin South 4th Road, Shenzhen, China"
+        },
+        products: [
+            { name: "Skyworth A23", description: "4K OLED TV with AI picture enhancement" },
+            { name: "Skyworth G23", description: "4K Smart TV with Android 11" },
+            { name: "Skyworth Q23", description: "QLED TV with quantum dot technology" }
+        ],
+        features: ["AI Picture Enhancement", "Android 11", "Quantum Dots", "Gaming Mode", "Smart Home"]
+    },
+    {
+        id: 13,
+        name: "Konka",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Konka_logo.svg",
+        logoAlt: "Konka Logo",
+        country: "China",
+        region: "Asia",
+        description: "Established Chinese electronics brand offering reliable televisions with smart features, energy efficiency, and competitive pricing.",
+        categories: ["4K TV", "Smart TV", "LED TV", "Budget TV", "Android TV"],
+        contact: {
+            phone: "+86-755-3333-7777",
+            email: "service@konka.com",
+            website: "https://www.konka.com",
+            address: "Konka Group, Konka Building, 1 Konka Road, Shenzhen, China"
+        },
+        products: [
+            { name: "Konka A3", description: "4K Smart TV with Android TV" },
+            { name: "Konka G3", description: "4K LED TV with HDR support" },
+            { name: "Konka Q3", description: "QLED TV with quantum dot display" }
+        ],
+        features: ["Android TV", "HDR Support", "Quantum Dots", "Smart Voice", "Energy Efficient"]
+    },
+    {
+        id: 14,
+        name: "Changhong",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Changhong_logo.svg",
+        logoAlt: "Changhong Logo",
+        country: "China",
+        region: "Asia",
+        description: "Major Chinese electronics manufacturer specializing in smart TVs, OLED technology, and innovative display solutions for global markets.",
+        categories: ["4K TV", "OLED TV", "Smart TV", "Gaming TV", "Android TV"],
+        contact: {
+            phone: "+86-400-811-1666",
+            email: "service@changhong.com",
+            website: "https://www.changhong.com",
+            address: "Changhong Electric, 35 Mianxing East Road, Mianyang, Sichuan, China"
+        },
+        products: [
+            { name: "Changhong A7", description: "4K OLED TV with AI upscaling" },
+            { name: "Changhong G7", description: "4K Smart TV with Android TV" },
+            { name: "Changhong Q7", description: "QLED TV with quantum dot technology" }
+        ],
+        features: ["AI Upscaling", "Android TV", "Quantum Dots", "Gaming Mode", "Smart Voice"]
+    },
+    {
+        id: 15,
+        name: "JVC",
+        logo: "https://upload.wikimedia.org/wikipedia/commons/8/8a/JVC_logo.svg",
+        logoAlt: "JVC Logo",
+        country: "Japan",
+        region: "Asia",
+        description: "Japanese electronics brand known for high-quality televisions with advanced picture processing and smart connectivity features.",
+        categories: ["4K TV", "Smart TV", "LED TV", "Gaming TV", "Android TV"],
+        contact: {
+            phone: "+81-3-3456-7890",
+            email: "service@jvc.com",
+            website: "https://www.jvc.com",
+            address: "JVC Kenwood Corporation, 3-12, Moriya-cho, Kanagawa-ku, Yokohama, Japan"
+        },
+        products: [
+            { name: "JVC LT-55C890", description: "4K Smart TV with Android TV" },
+            { name: "JVC LT-65C890", description: "4K LED TV with HDR support" },
+            { name: "JVC LT-75C890", description: "4K Smart TV with gaming features" }
+        ],
+        features: ["Android TV", "HDR Support", "Gaming Mode", "Smart Voice", "4K Ultra HD"]
     }
 ];
 
